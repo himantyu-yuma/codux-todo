@@ -1,23 +1,20 @@
-import logo from './assets/logo.svg';
+import { useState } from 'react';
 import styles from './App.module.scss';
+import { TodoList } from './components/todo-list';
+import { Button } from './components/button';
 
 function App() {
+    const [tasks, setTasks] = useState(['タスク-1']);
+
+    const handleClickAddButton = () => {
+        setTasks((prev) => [...prev, `タスク-${prev.length + 1}`]);
+    };
     return (
         <div className={styles.App}>
-            <header className={styles['App-header']}>
-                <img src={logo} className={styles['App-logo']} alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className={styles['App-link']}
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <div className={styles['button-wrapper']}>
+                <Button label="追加" onClick={() => handleClickAddButton()} />
+            </div>
+            <TodoList tasks={tasks} />
         </div>
     );
 }
